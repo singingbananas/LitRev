@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" ng-app="application">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LitRev</title>
+    <link href="assets/css/app.css" rel="stylesheet" type="text/css">
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/routes.js"></script>
+    <script src="assets/js/angular.js"></script>
+  </head>
+
+  <style>
+    .message-input, .message-input .inline-label, .menu-bar {margin-bottom: 0;}
+    #sidebar, .messages {border-right: 1px solid #eee;}
+    .message-side-bar {border-left: 1px solid #eee;}
+    .avatar-section {border-top: 1px solid #eee;}
+  </style>
+
+  <body>
+    <div class="grid-frame">
+      <div zf-panel position="left" id="sidebar" class="medium-grid-block collapse medium-3 large-3 vertical">
+        <div class="grid-content collapse shrink hide-for-medium">
+          <a href="" class="secondary button expand" zf-close>Close</a>
+        </div>
+        <div class="grid-content collapse shrink">
+          <img src="http://placehold.it/400x150&text=Logo">
+        </div>
+        <div class="grid-content">
+          
+          <section class="block-list">
+            <header>Projects</header>
+            <ul>
+              <li>
+                <a href="#">
+                  Research Project 1
+                  <span class="block-list-label">7</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Research Project 2
+                  <span class="block-list-label">2</span>
+                </a>
+              </li>
+              <li>
+                <a class="success" href="#">
+                  Research Project 3
+                  <span class="block-list-label">2</span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+        </div>
+        <div class="grid-content collapse shrink avatar-section">
+            <img src="http://placehold.it/50x50">
+            John Doe
+        </div>
+      </div>
+
+      <div class="grid-block collapse medium-9 large-9 vertical">
+        <div id="header" class="shrink collapse grid-content">
+          <ul class="menu-bar primary">
+            <li class="hide-for-medium"><a zf-open="sidebar" href="#">Menu</a></li>
+            <li><a href="#">BibTex</a></li>
+            <!--<li><a href="#">Logout</a></li>-->
+          </ul>
+        </div>
+        <div class="grid-block">
+          <div class="grid-block vertical">
+            <div class="grid-content">
+              <h4><img src="http://placehold.it/30x30"> Paper 1 Title</h4>
+              <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue.</p>
+              <hr />
+              <h4><img src="http://placehold.it/30x30"> Paper 2 Title</h4>
+              <p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat.</p>
+              <hr />
+              <h4><img src="http://placehold.it/30x30"> Paper 3</h4>
+              <p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat.</p>
+              <hr />
+              <h4><img src="http://placehold.it/30x30"> Paper 4</h4>
+              <p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat.</p>
+              <hr />
+              <h4><img src="http://placehold.it/30x30"> Paper 5</h4>
+              <p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat.</p>
+              <hr />
+              <h4><img src="http://placehold.it/30x30"> Paper 6 </h4>
+              <p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat.</p>
+              <hr />
+              <h4><img src="http://placehold.it/30x30"> Paper 7</h4>
+              <p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat.</p>
+              <hr />
+              <h4><img src="http://placehold.it/30x30"> Paper 8</h4>
+              <p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat.</p>
+              <hr />
+            </div>
+          
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
+
+<!-- ui-view  -->
