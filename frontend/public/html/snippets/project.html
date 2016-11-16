@@ -1,0 +1,116 @@
+<article id="project_view">
+	
+<!-- TODO: animate the dialogs opening and closing -->
+	<div id="project_filters" style="display: none;">
+		<form class="pure-form pure-form-stacked">
+		    <fieldset>
+		        <legend>Filter</legend>
+		        <div class="pure-g">
+			        <div class="pure-u-1-3">
+			            <select class="pure-u-1-1" id="project_filter_type">
+			                <option value="Author">Author</option>
+			                <option value="Title">Title</option>
+			                <option value="Keywords">Keywords</option>
+			            </select>
+			        </div>
+			        <div class="pure-u-2-3">
+			        	<input class="pure-u-1-1" required="" id="project_filter_value">
+			        </div>
+
+			        <div class="pure-u-1-1">
+
+			        	<button type="submit" id="project_filter_submit" class="pure-button pure-button-primary button-large" style="float:right;">
+			        	Submit</button>
+			        	<button type="submit" id="project_filter_clear" formnovalidate class="pure-button pure-button-secondary button-large" style="float:right;">Clear</button>
+			        </div>
+
+		        </div>
+		    </fieldset>
+		</form>
+	</div>
+		
+	<div id="project_new_paper" style="display: none;">
+		<ul>
+			<li><label>Title:         </label><input type="text"/></li>
+			<li><label>Authors:       </label><input type="text"/></li>
+			<li><label>Venue:         </label><input type="text"/></li>
+			<li><label>Citations:     </label><input type="text"/></li>
+			<li><label>Year Published:</label><input type="text"/></li>
+			<li><label>Keywords:      </label><input type="text"/></li>
+			<li><label>BlbTex:        </label><input type="text"/></li>
+			<li><label>PDF:           </label></li>
+			<li><input style="float:left; width: 275px; color: #FFFFFF;" type="file"/></li>
+			<li><label>Summary:</label></li>
+			<li class="textAreaRow"><textarea></textarea></li>
+			<li>
+				<button id="project_new_paper_save_button">save</button>
+				<button id="project_new_paper_cancel_button">cancel</button>
+			</li>
+		</ul>
+		<div id="project_new_paper_toggle_close"></div>
+	</div>
+	
+
+	<div id="project_edit" style="display: none;">
+		
+	</div>
+
+
+	<div id="project_meta_data">
+
+
+
+		<h2 data-bind="text: Title"></h2>
+		<p>
+			<span><b>Description:</b></span><span data-bind="text: Description"></span><br>
+			<span><b>Target Deadline:</b></span><span data-bind="text: Target_Deadline"></span><br>
+			<span><b>Target Venue:</b></span><span data-bind="text: Target_Venue"></span><br>
+		</p>
+
+
+	</div>
+
+	<div id="project_results">
+		<table class="pure-table" style="width:926px;">
+			<thead>
+				<tr>
+					<td  data-columnType="">Delete</td>
+					<td  data-columnType="">Edit</td>
+					<td  data-columnType="pdf">PDF</td>
+					<td  data-columnType="title">Title</td>
+					<td  data-columnType="authors">Authors</td>
+					<td  data-columnType="venue">Venue</td>
+					<td  data-columnType="citations">Citations</td>
+					<td  data-columnType="yearpublished">Year Published</td>
+					<td  data-columnType="keywords">Keywords</td>
+					<td  data-columnType="blbtex">BlbTex</td>
+				</tr>
+			</thead>
+			<tbody data-bind="foreach: papers">
+				<tr>
+					<td>
+						<span onmousedown="LitRev.Project.deletePaper(this);" data-bind="attr: { paperid: Paper_ID }" >
+							<i class="fa fa-times"></i>
+						</span></td>
+					<td><span data-bind="attr: { paperid: Paper_ID }" data-toggle="modal" data-target="#editPaperModal">
+						<i class="fa fa-pencil"></i>
+					</span></td>
+					<td>
+						<span data-target="#PDFModal" data-toggle="modal" data-bind="attr: { paperid: Paper_ID }">
+							<i class="fa fa-file-pdf-o"></i>
+						</span>
+					</td>
+					<td data-bind="text: Title"></td>
+					<td data-bind="text: Authors"></td>
+					<td data-bind="text: Venue"></td>
+					<td data-bind="text: Citations"></td>
+					<td data-bind="text: Year_Published"></td>
+					<td data-bind="text: Keywords"></td>
+					<td data-bind="text: BibTeX"></td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+
+</article>

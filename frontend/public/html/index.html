@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>LitRev 1.0-dev | Literature Review Manager</title>
+		
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="description" content="" />
+		<meta name="author" content="Vsevolod Khikbin" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+		<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+		
+
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+		<link rel="stylesheet" href="../css/pure-release-0.6.0/pure-min.css" type="text/css" media="all">
+
+		<link rel="stylesheet" href="../css/pure-release-0.6.0/grids-responsive-min.css">
+
+		<link rel="stylesheet" href="../css/reset.css" type="text/css" media="all">
+		<link rel="stylesheet" href="../css/style.css" type="text/css" media="all">
+
+		<link rel="stylesheet" href="../css/jqueryui/jquery-ui.css" type="text/css" media="all">
+		<link rel="stylesheet" href="../css/jqueryui/jquery-ui.structure.css" type="text/css" media="all">
+		<link rel="stylesheet" href="../css/jqueryui/jquery-ui.theme.css" type="text/css" media="all">
+		<link rel="stylesheet" href="../css/taggle.css" type="text/css" media="all">
+		<link rel="stylesheet" href="../css/litrev.css" type="text/css" media="all">
+		
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		
+
+
+		<style>
+		      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+	      .central {
+			  text-align: center;
+			  margin-top: 100px;
+			}
+
+			h2 {
+			  font-size: 1.8em;
+			  font-weight: bold;
+			}
+
+			.success-button {
+			  background: rgb(28, 184, 65);
+			  color: white;
+			  border-radius: 0px;
+			  margin-left: 20px;
+			}
+
+			.custom-form {
+			  margin: 40px 20px;
+			}
+
+			h2 {
+			  text-align: center;
+			}
+
+			.c {
+			  margin: auto;
+			  max-width: 800px;
+			}
+
+			.p {
+			  font-size: .9em;
+			  padding-top: 300px;
+			  text-align: center;
+		}
+		</style>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+		<script src="../js/lib/jquery-3.1.1.js"></script>
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+		<script src="../js/lib/knockout-3.4.0.js"></script>
+		<script type="text/javascript" src="../js/lib/jquery-ui.js"></script>
+		<script t
+		ext/javascript" src="../js/lib/taggle.js"></script>
+
+		<script type="text/javascript" src="../js/lib/cufon-yui.js"></script>
+		<script type="text/javascript" src="../js/lib/Humanst521_BT_400.font.js"></script>
+		<script type="text/javascript" src="../js/lib/Humanst521_Lt_BT_400.font.js"></script>
+		<script type="text/javascript" src="../js/lib/roundabout.js"></script>
+		<script type="text/javascript" src="../js/lib/roundabout_shapes.js"></script>
+		<script type="text/javascript" src="../js/lib/gallery_init.js"></script>
+		<script type="text/javascript" src="../js/lib/cufon-replace.js"></script>
+
+		<script src="https://cdn.auth0.com/js/lock/10.4/lock.min.js"></script>
+		
+		<script src="../js/Litrev.js"></script>		
+		<script src="../js/Litrev.Profile.js"></script>
+		<script src="../js/Litrev.Project.js"></script>
+		<script src="../js/LitRev.Paper.js"></script>
+		<script src="../js/LitRev.NewProject.js"></script>
+		<script>
+			LitRev.GLOBAL = {
+
+			};
+		</script>
+		<script>
+			var lock = new Auth0Lock('rVaeNCrDTttA0F5dYCPR9sbag1klfFeG', 'rom.eu.auth0.com',{
+				closable: false, 
+				additionalSignUpFields: [
+				{ name: "full_name", placeholder: "Enter your full name"},
+				{
+     				type: "select",                                       // required
+      				name: "Position",                                     // required
+      				placeholder: "Your Position",                  // required
+      				options: [                                            // required
+        				{ value: "prof", label: "Professor"},
+        				{ value: "grad", label: "Graduate Student"},
+        				{ value: "ugrad", label: "Undergraduate Student"}
+      				]
+      				},
+				{ name: "biography",  placeholder: "Enter your biography"}	
+			]
+			});
+			
+			// Listening for the authenticated event
+			lock.on("authenticated", function(authResult) {
+				console.log(authResult);
+				// Use the token in authResult to getProfile() and save it to localStorage
+				lock.getProfile(authResult.idToken, function(error, profile) {
+			    	if (error) {
+			    		// Handle error
+			    		return;
+			    	}
+			    	localStorage.setItem('idToken', authResult.idToken);
+			    	localStorage.setItem('profile', JSON.stringify(profile));
+			    	var profile = JSON.parse(localStorage.getItem('profile'));
+				});
+			});
+			
+			window.onload = function() {
+				try {
+					var token = localStorage.getItem('idToken');
+					if(token !== null) {
+						LitRev.init();
+					} else {
+						lock.show();
+					}
+				}catch(err) {
+					console.log(err);
+				}
+			};
+		</script>
+	</head>
+	
+	<body>
+	  <!-- header -->
+		<header>
+			<div class="container">
+		    	<h1><a href="index.html">LitRev</a></h1>
+		    	<nav>
+		        	<ul>
+		        		<li><a onclick="LitRev.NewProject.init()">+ Project</a></li>
+		        		<li><a onclick="LitRev.Profile.init()" class="current">Profile</a></li>
+		        		<li><a onclick="LitRev.logout()">logout</a></li>
+		        	</ul>
+		      </nav>
+		    </div>
+		</header>
+	
+	  <div class="main-box">
+		<div class="pure-menu pure-menu-horizontal" id="project_menu" style="text-align: right; display: none;">
+		    <ul class="pure-menu-list">
+		        <li class="pure-menu-item" style="cursor: pointer;" id="project_filters_toggle">
+		        	<a class="pure-menu-link">Filter</a>
+		        </li>
+		        <li class="pure-menu-item" style="cursor: pointer;" data-toggle="modal" data-target="#addPaperModal">
+		        	<a class="pure-menu-link">Add Paper</a>
+		        </li>
+		       	<li class="pure-menu-item" style="cursor: pointer;" data-toggle="modal" 
+		       	data-target="#editProjectModal">
+		        	<a class="pure-menu-link">Edit Project</a>
+		        </li>
+		       	<li class="pure-menu-item" style="cursor: pointer;" id="project_delete">
+		        	<a class="pure-menu-link">Delete Project</a>
+		        </li>
+		       	<li class="pure-menu-item" style="cursor: pointer;" >
+		        	<a class="pure-menu-link" href="" id="project_bibtex_download" target="_blank">BibTeX</a>
+		        </li>
+		    </ul>
+		</div>
+
+<div id ="PDFModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" 
+	aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+
+				<!-- -->
+				<h2 id="myModalLabel" style="float:left; font-size: 24px;">PDF Viewer</h2>
+				<!-- -->
+
+				<!--MENU FOR PDF Viewer-->
+				<div class="pure-menu pure-menu-horizontal">
+					<ul class="pure-menu-list" style="font-size: 20px;">
+						<li class="pure-menu-item" id="editpdf">
+							<a class="pure-menu-link">Edit</a>
+						</li>
+						<li class="pure-menu-item" id="dwnload">
+							<a class="pure-menu-link">Download</a>
+						</li>
+						<li class="pure-menu-item">
+							<a id="exit" data-dismiss="modal" class="pure-menu-link">Close</a>
+						</li>
+					</ul>
+				</div><!-- -->
+
+				<div id = "edit_pdf_menu" class="hidden">
+					<div class="pure-g">
+						<div class="pure-u-1-4">
+							<input id="paper_to_upload" class="pure-input-1" type="file" required/>
+						</div>
+						<div class="pure-u-1-2">
+							<button id "pdf_upload_btn" class="pure-button pure-button-primary">Upload
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-body" style="background-color:#3e3e3e">
+				<canvas id="the-canvas" style="border:1px solid black;"/>
+			</div>
+
+			<div class="modal-footer">
+				<div class="pure-menu pure-menu-horizontal">
+					<ul class="pure-menu-list">
+						<li class="pure-menu-item" id="btn-prv">
+							<a class="pure-menu-link">Previous</a>
+						</li>
+						<li class="pure-menu-item pure-menu-disabled">
+							<div id="page-count">0/0</div>
+						</li>
+						<li class="pure-menu-item" id="btn-nxt" >
+							<a class="pure-menu-link">Next</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+	<div id="addPaperModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	        <div class="modal-header">Add Paper</div>
+	        	<div class="modal-body">
+					<form class="pure-form pure-form-stacked">
+				    	<fieldset>
+							<label>Title:</label>
+							<input id="addPaper_title" class="pure-input-1" type="text" placeholder="Title" required/>
+							<label>Authors:       </label>
+							<input id="addPaper_authors" class="pure-input-1" type="text" placeholder="Authors" required/>
+							<label>Venue:         </label>
+							<input id="addPaper_venue" class="pure-input-1" type="text" placeholder="Venue" required/>
+							<label>Citations:     </label>
+							<input id="addPaper_citations" class="pure-input-1" type="text" placeholder="Citations" required/>
+							<label>Year Published:</label>
+							<input id="addPaper_year" class="pure-input-1" type="" placeholder="Year" required/>
+							<label>Keywords:      </label>
+							<input id="addPaper_keywords" class="pure-input-1" type="text" placeholder="Keywords, Comma Speparated" required/>
+							<label>BlbTex:        </label>
+							<textarea id="addPaper_blbtex" class="pure-input-1" required></textarea>
+							<label>PDF:           </label>
+							<input id="addPaper_pdf" class="pure-input-1" type="file" required/>
+							<label>Summary:</label>
+							<textarea id="addPaper_summary" class="pure-input-1" required></textarea>
+						</fieldset>
+					</form>
+	        	</div>
+	        	<div class="modal-footer">
+	        		<button type="button" class="pure-button" id="addPaperSubmit" data-dismiss="modal">Submit</button>
+	        		<button type="button" class="pure-button" id="success-button" data-dismiss="modal">Close</button>
+	        	</div>
+	    	</div>
+	    </div>
+	</div>
+
+	<div id="editPaperModal" class="modal fade" role="dialog">
+	    <div class="modal-dialog">
+	      	<div class="modal-content">
+	        	<div class="modal-header">Edit Paper</div>
+	        	<div class="modal-body">
+					<form class="pure-form pure-form-stacked">
+				    	<fieldset>
+							<label>Title:</label>
+							<input class="pure-input-1" type="text" placeholder="Title" id="editPaper_title" required/>
+							<label>Authors:       </label>
+							<input class="pure-input-1" type="text" placeholder="Authors" id="editPaper_authors" required/>
+							<label>Venue:         </label>
+							<input class="pure-input-1" type="text" placeholder="Venue" id="editPaper_venue" required/>
+							<label>Citations:     </label>
+							<input class="pure-input-1" type="text" placeholder="Citations" id="editPaper_citations" required/>
+							<label>Year Published:</label>
+							<input class="pure-input-1" type="" placeholder="Year" id="editPaper_year" required/>
+							<label>Keywords:      </label>
+							<input class="pure-input-1" type="text" placeholder="Keywords, Comma Speparated" id="editPaper_keywords" required/>
+							<label>BlbTex:        </label>
+							<textarea class="pure-input-1" id="editPaper_blbtex" required></textarea>
+							<label>Summary:</label>
+							<textarea class="pure-input-1" id="editPaper_summary" required></textarea>
+						</fieldset>
+					</form>
+	        	</div>
+	        	<div class="modal-footer">
+	        		<button type="button" class="pure-button" id="editPaperSubmit" data-dismiss="modal">Submit</button>
+	        		<button type="button" class="pure-button" id="success-button" data-dismiss="modal">Close</button>
+	        	</div>
+	    	</div>
+		</div>
+	</div>
+
+	<div id="editProjectModal" class="modal fade" role="dialog">
+	    <div class="modal-dialog">
+	      <div class="modal-content">
+	        <div class="modal-header">Edit Project</div>
+	 
+	        <div class="modal-body">
+				<form class="pure-form pure-form-stacked">
+				    <fieldset>
+						<label>Title:</label>
+						<input id="edit_project_title" class="pure-input-1" type="text" placeholder="Title" required/>
+						<label>Description:</label>
+						<textarea id="edit_project_description" class="pure-input-1"></textarea>
+						<label>Venue:</label>
+						<input id="edit_project_venue" class="pure-input-1" type="text" placeholder="Venue" required/>
+						<label>Deadline:</label>
+						<input id="edit_project_deadline" class="pure-input-1" type="date" placeholder="Deadline" required/>
+					</fieldset>
+				</form>
+	        </div>
+
+	        <div class="modal-footer">
+	          <button type="button" class="pure-button" id="editProjectSubmit" data-dismiss="modal">Submit</button>
+	          <button type="button" class="pure-button" id="success-button" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+
+	    <div class="container">
+	      <div class="inside">
+	        <div class="wrapper" id="mainContent">
+	        <!--  <section id="content">-->
+
+	        <!--  </section>-->
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	
+	  <!-- footer -->
+	  <footer>
+	    <div class="container">
+	        <div class="fleft">&copy; 2016 - Developed by the Singing Bananas<br/> All Righs Reserved</div>
+	        <!--<div class="fright">HTML Template by <a href="http://www.templatemonster.com/" target="_blank" rel="nofollow">www.templatemonster.com</a></div>-->
+	  </footer>
+	  <script type="text/javascript"> Cufon.now(); </script>
+
+
+	<script src="../js/pdf.js"></script>
+	<script type="../js/pdf.worker.js"></script>
+	<script src="../js/blob.js"></script>
+	<script src="../js/filesaver.js"></script>
+	</body>
+</html>
