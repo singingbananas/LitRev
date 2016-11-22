@@ -47,9 +47,6 @@ LitRev.Project = function() {
 
 
 		$("#project_filter_submit").on("click", function() {
-
-	
-
 			
 			var project_filter_type = $("#project_filter_type option:selected").val();
 			var project_filter_value = $("#project_filter_value").val();
@@ -75,22 +72,19 @@ LitRev.Project = function() {
 				conf.filter_url = request_url;
 				//console.log(request_url);
 				$.get(conf.filter_url, function(data){
-					//console.log(data);
-
-
 					conf.ProjectViewModel.papers(JSON.parse(data).papers);
 				});
 
 			}
-
+			return false;
 		});
 
 		$("#project_filter_clear").on("mousedown", function(){
 			$("#project_filter_value").val("");
 			conf.filter_url = "";
 			refreshTableData();
-
-		})
+			return false;
+		})/* */
 
 		$("#project_delete").on("mousedown", function() {
 			if(confirm("Are you sure you want to permenantly remove this project?")) {
