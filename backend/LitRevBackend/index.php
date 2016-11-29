@@ -265,8 +265,10 @@ $app->post('/project/{projectid}/paper/{paperid}', function(Request $request, Re
 });
 //modify a pdf paper in a project 
 $app->post('/project/{projectid}/paper/{paperid}/ChangePDF', function(Request $request, Response $response){
-	$sql= "UPDATE TABLE `papers` SET `PDF` = :pdf
+	$sql= "UPDATE `papers` SET `PDF` = :pdf
 	WHERE Paper_ID = :paperid";
+	$body = $request->getParsedBody();
+	//echo $body['pdf'];
 	$paperid= $request->getAttribute('paperid');
 	try {
         $dbCon = getConnection();
