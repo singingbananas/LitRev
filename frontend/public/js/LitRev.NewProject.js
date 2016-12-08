@@ -6,6 +6,7 @@ LitRev.NewProject = function() {
 	var colaborators = null;
 
 	var init = function() {
+		$("#project_menu").hide();
 		$("#mainContent").load("snippets/newproject.html", _handleViewLoad);
 	};
 
@@ -24,7 +25,11 @@ LitRev.NewProject = function() {
 			}
 
 			activateOutocomplete();
-		})
+		});
+
+		$("#addProjectClose").on("click", function(){
+			LitRev.init();
+		});
 	};
 
 	///////////////////////////////////////////////////////////////////////////

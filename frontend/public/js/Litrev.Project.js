@@ -18,7 +18,6 @@ LitRev.Project = function() {
 	}
 	
 	var _handleViewLoad = function() {
-		//$("#project_filters_toggle_open").on("mousedown", openFiltersDialog);
 
 
 		$("#project_filters_toggle").on("mousedown", function(event){
@@ -34,8 +33,6 @@ LitRev.Project = function() {
 				conf.filter_showing = true;
 			}
 		});
-
-		//$("#project_add_paper").on("mousedown", openAddNewPaperDialog);
 		
 		$("#project_filters_toggle_close").on("mousedown", closeFiltersDialog);
 		$("#project_new_paper_toggle_close").on("mousedown", closeAddNewPaperDialog);
@@ -47,17 +44,11 @@ LitRev.Project = function() {
 
 
 		$("#project_filter_submit").on("click", function() {
-			
 			var project_filter_type = $("#project_filter_type option:selected").val();
 			var project_filter_value = $("#project_filter_value").val();
-
-
 	        var request_url = "https://litrev.dyn.wpi.edu/LitRev/backend/LitRevBackend";
 
-	        //console.log(project_filter_type);
-
 			if(project_filter_value !== "") {
-
 				switch(project_filter_type) {
 				    case "Author":
 				        request_url += "/search/paper/author/" + project_filter_value
@@ -70,7 +61,6 @@ LitRev.Project = function() {
 				        break;
 				}
 				conf.filter_url = request_url;
-				//console.log(request_url);
 				$.get(conf.filter_url, function(data){
 					conf.ProjectViewModel.papers(JSON.parse(data).papers);
 				});
@@ -84,7 +74,7 @@ LitRev.Project = function() {
 			conf.filter_url = "";
 			refreshTableData();
 			return false;
-		})/* */
+		})
 
 		$("#project_delete").on("mousedown", function() {
 			if(confirm("Are you sure you want to permenantly remove this project?")) {
@@ -101,7 +91,6 @@ LitRev.Project = function() {
 		});
 
 		$("#project_bibtex_download").attr("href", "https://litrev.dyn.wpi.edu/LitRev/backend/LitRevBackend/project/"+conf.ID+"/BibTeX");
-
 
 		var request_url = "https://litrev.dyn.wpi.edu/LitRev/backend/LitRevBackend/project/" + conf.ID;
 		$.get(request_url, procesTableData);
@@ -314,6 +303,22 @@ LitRev.Project = function() {
 			});
 
 		});
+
+		//----------------------------------------
+		$("#paperSummaryModal").on('shown.bs.modal', function (data) {
+			var paperid = $(data.relatedTarget).attr("paperid"),
+				request_url = "https://litrev.dyn.wpi.edu/LitRev/backend/LitRevBackend/project/"+conf.ID+"/paper/"+paperid;
+			
+			$.get(request_url, function(data) {
+				var responceJson = JSON.parse(data);
+				$("#modal_paper_main_par").html(responceJson.Summary);
+			});
+		});	
+
+		$("#paperSummaryModal").on('hidden.bs.modal', function (data) {
+			$("#modal_paper_main_par").html("");
+		});
+
 		//----------------------------------------
 		LitRev.Paper.init(conf.ID);
 	};

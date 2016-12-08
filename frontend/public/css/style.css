@@ -1,4 +1,4 @@
-/* Getting the new tags to behave */
+.wrapper/* Getting the new tags to behave */
 article, aside, audio, canvas, command, datalist, details, embed, figcaption, figure, footer, header, hgroup, keygen, meter, nav, output, progress, section, source, video{ display: block; }
 mark, rp, rt, ruby, summary, time{ display: inline }
 
@@ -73,7 +73,6 @@ html, body { height:100%;}
 
 .wrapper {
 	width:100%;
-	overflow:hidden;
 }
 
 /* The inside class provides consistent padding. To be used often! */

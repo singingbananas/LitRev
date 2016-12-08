@@ -117,7 +117,10 @@
         				{ value: "ugrad", label: "Undergraduate Student"}
       				]
       				},
-				{ name: "biography",  placeholder: "Enter your biography"}	
+				{ 
+					name: "biography",  
+					placeholder: "Enter your biography"
+				}	
 			]
 			});
 			
@@ -193,41 +196,15 @@
 
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header">PDF Viewer</div>
 
+				<!-- --
+				<h2 id="myModalLabel" style="font-size: 24px;">PDF Viewer</h2>
 				<!-- -->
-				<h2 id="myModalLabel" style="float:left; font-size: 24px;">PDF Viewer</h2>
-				<!-- -->
 
-				<!--MENU FOR PDF Viewer-->
-				<div class="pure-menu pure-menu-horizontal">
-					<ul class="pure-menu-list" style="font-size: 20px;">
-						<li class="pure-menu-item" id="editpdf">
-							<a class="pure-menu-link">Edit</a>
-						</li>
-						<li class="pure-menu-item" id="dwnload">
-							<a class="pure-menu-link">Download</a>
-						</li>
-						<li class="pure-menu-item">
-							<a id="exit" data-dismiss="modal" class="pure-menu-link">Close</a>
-						</li>
-					</ul>
-				</div><!-- -->
 
-				<div id = "edit_pdf_menu" class="hidden">
-					<div class="pure-g">
-						<div class="pure-u-1-4">
-							<input id="paper_to_upload" class="pure-input-1" type="file" required/>
-						</div>
-						<div class="pure-u-1-2">
-							<button id "pdf_upload_btn" class="pure-button pure-button-primary">Upload
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
 
-			<div class="modal-body" style="background-color:#3e3e3e">
+			<div class="modal-body" style="background-color:#3e3e3e; overflow: scroll;">
 				<canvas id="the-canvas" style="border:1px solid black;"/>
 			</div>
 
@@ -235,17 +212,51 @@
 				<div class="pure-menu pure-menu-horizontal">
 					<ul class="pure-menu-list">
 						<li class="pure-menu-item" id="btn-prv">
-							<a class="pure-menu-link">Previous</a>
+							<a class="pure-menu-link" style="cursor: pointer;">Previous</a>
 						</li>
 						<li class="pure-menu-item pure-menu-disabled">
 							<div id="page-count">0/0</div>
 						</li>
 						<li class="pure-menu-item" id="btn-nxt" >
-							<a class="pure-menu-link">Next</a>
+							<a class="pure-menu-link" style="cursor: pointer;">Next</a>
 						</li>
 					</ul>
 				</div>
 			</div>
+
+			<div class="modal-footer">
+				<div class="pure-menu pure-menu-horizontal">
+
+					<div class="pure-menu pure-menu-horizontal">
+						<ul class="pure-menu-list" style="font-size: 20px;">
+							<li class="pure-menu-item" id="editpdf">
+								<a class="pure-menu-link" style="cursor: pointer;">Edit</a>
+							</li>
+							<li class="pure-menu-item" id="dwnload">
+								<a class="pure-menu-link" style="cursor: pointer;">Download</a>
+							</li>
+							<li class="pure-menu-item">
+								<a id="exit" data-dismiss="modal" class="pure-menu-link" style="cursor: pointer;">Close</a>
+							</li>
+						</ul>
+					</div>
+
+					<!--<div id = "edit_pdf_menu"><!-- -->
+					<div id = "edit_pdf_menu" class="hidden"><!-- -->
+						<div class="pure-g">
+							<div class="pure-u-1-2">
+								<input id="paper_to_upload" class="pure-input-1" type="file" required/>
+							</div>
+							<div class="pure-u-1-2">
+								<button id="pdf_upload_btn" class="pure-button pure-button-primary">Upload
+								</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
 
 		</div>
 	</div>
@@ -253,6 +264,20 @@
 
 
 
+	<div id="paperSummaryModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	        <div class="modal-header">Add Paper</div>
+	        	<div class="modal-body">
+					<p id="modal_paper_main_par">
+					</p>
+	        	</div>
+	        	<div class="modal-footer">
+	        		<button type="button" class="pure-button" id="success-button" data-dismiss="modal">Close</button>
+	        	</div>
+	    	</div>
+	    </div>
+	</div>
 
 
 	<div id="addPaperModal" class="modal fade" role="dialog">
