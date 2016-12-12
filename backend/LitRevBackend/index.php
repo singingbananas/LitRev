@@ -11,7 +11,7 @@ if (PHP_SAPI == 'cli-server') {
 function getConnection() {
 	try {
 		$db_username = "litrev-user";
-		$db_password = "Rk7WL50VfW6lk3Pb";
+		$db_password = "";
 		$conn = new PDO('mysql:host=localhost;dbname=Database', $db_username, $db_password);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
